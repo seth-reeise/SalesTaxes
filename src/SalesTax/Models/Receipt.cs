@@ -30,6 +30,9 @@ public class Receipt
             }
         }
 
+        sb.Append($"Sales Taxes: {SalesTax.ToString("F")}\n");
+        sb.Append($"Total: {Total.ToString("F")}\n");
+
         return sb.ToString();
     }
 }
