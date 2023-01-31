@@ -22,11 +22,11 @@ public class Receipt
         {
             if (item.Quantity > 1)
             {
-                sb.Append($"{item.ItemDescription}: {item.Price * item.Quantity} ({item.Quantity} @ {item.Price})\n");
+                sb.Append(string.Format($"{item.ItemDescription}: {(item.Price * item.Quantity).ToString("F")} ({item.Quantity} @ {item.Price.ToString("F")})\n"));
             }
             else
             {
-                sb.Append($"{item.ItemDescription}: {item.Price}\n");
+                sb.Append($"{item.ItemDescription}: {item.Price.ToString("F")}\n");
             }
         }
 
