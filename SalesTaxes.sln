@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTax", "src\SalesTax\SalesTax.csproj", "{545B1505-F6EA-4B57-B016-ADACDA569A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTaxUnitTests", "src\SalesTaxUnitTests\SalesTaxUnitTests.csproj", "{C3540213-ACBA-4A2A-B200-9846E84A6827}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{545B1505-F6EA-4B57-B016-ADACDA569A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545B1505-F6EA-4B57-B016-ADACDA569A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545B1505-F6EA-4B57-B016-ADACDA569A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545B1505-F6EA-4B57-B016-ADACDA569A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3540213-ACBA-4A2A-B200-9846E84A6827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3540213-ACBA-4A2A-B200-9846E84A6827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3540213-ACBA-4A2A-B200-9846E84A6827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3540213-ACBA-4A2A-B200-9846E84A6827}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
