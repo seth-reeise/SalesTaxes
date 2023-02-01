@@ -19,7 +19,7 @@ do
         var item = InputParser.GetInput(input);
         basket.AddItemToBasket(item);
     }
-    catch (Exception e)
+    catch (Exception)
     {
         // log exception
     }

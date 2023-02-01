@@ -38,7 +38,7 @@ public class InputParser
                 isExempt = isExemptString.Equals("y", StringComparison.OrdinalIgnoreCase) || isExemptString.Equals("yes", StringComparison.OrdinalIgnoreCase);
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             Console.WriteLine("\n**Input not entered correctly, please try again!**\n");
             throw new ArgumentException();
