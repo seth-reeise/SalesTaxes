@@ -4,17 +4,17 @@ namespace SalesTax.Models;
 
 public class Receipt
 {
-    private List<StoreItem> StoreItems { get; }
-    private decimal SalesTax { get; }
-    private decimal Total { get; }
-    
+    public List<StoreItem> StoreItems { get; }
+    public decimal SalesTax { get; }
+    public decimal Total { get; }
+
     public Receipt(List<StoreItem> storeItems, decimal salesTax, decimal total)
     {
         StoreItems = storeItems;
         SalesTax = salesTax;
         Total = total;
     }
-    
+
     public override string ToString()
     {
         var sb = new StringBuilder();

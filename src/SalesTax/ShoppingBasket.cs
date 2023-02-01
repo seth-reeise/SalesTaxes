@@ -40,12 +40,12 @@ public class ShoppingBasket : IEnumerable
         var regularSalesTaxRate = .10m;
         // Item is imported but not exempt
         var importedAndRegularRate = .15m;
-        
+
         // item tax for each item is calculated by the tax rate and then rounded up to the nearest .05 with Math.Ceiling(rate*20) / 20
         foreach (var item in Basket)
         {
             var itemTax = 0m;
-            
+
             // Imported and exempt item
             if (item.IsImported && item.IsExempt)
             {
@@ -54,8 +54,8 @@ public class ShoppingBasket : IEnumerable
                 salesTax += (itemTax * item.Quantity);
 
                 total += (item.Price * item.Quantity);
-                
-            } 
+
+            }
             // Imported but not exempt item
             else if (item.IsImported && !item.IsExempt)
             {
@@ -64,14 +64,14 @@ public class ShoppingBasket : IEnumerable
                 salesTax += (itemTax * item.Quantity);
 
                 total += (item.Price * item.Quantity);
-            } 
+            }
             // Not exempt and not imported item
             else if (!item.IsExempt && !item.IsImported)
             {
-                itemTax = Math.Ceiling(item.Price * regularSalesTaxRate * 20 ) / 20;
+                itemTax = Math.Ceiling(item.Price * regularSalesTaxRate * 20) / 20;
                 item.Price += itemTax;
                 salesTax += (itemTax * item.Quantity);
-                
+
                 total += (item.Price * item.Quantity);
             }
             // No sales tax (exempt and not imported)
@@ -79,10 +79,10 @@ public class ShoppingBasket : IEnumerable
             {
                 total += item.Price * item.Quantity;
             }
-            
+
         }
         return new Receipt(Basket, salesTax, total);
-        
+
     }
 
     public IEnumerator GetEnumerator()

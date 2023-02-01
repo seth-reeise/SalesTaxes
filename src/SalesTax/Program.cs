@@ -1,7 +1,6 @@
 ﻿using SalesTax;
 
 ShoppingBasket basket = new();
-InputParser parser = new();
 
 do
 {
@@ -11,11 +10,13 @@ do
                           "each seperated by a space. Example input: 1 Book 12.49\n" +
                           "If you are done entering items, please enter: end");
         var input = Console.ReadLine();
-        if (input.Equals("End", StringComparison.OrdinalIgnoreCase))
+        if (input != null && input.Equals("End", StringComparison.OrdinalIgnoreCase))
         {
             break;
         }
-        var item = parser.getInput(input);
+
+        if (input == null) throw new ArgumentException();
+        var item = InputParser.GetInput(input);
         basket.AddItemToBasket(item);
     }
     catch (Exception e)
