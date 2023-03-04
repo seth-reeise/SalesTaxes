@@ -5,6 +5,7 @@ public class StoreItem
     public int Quantity { get; set; }
     public string ItemDescription { get; set; }
     public decimal Price { get; set; }
+    // Books, food, and medical products are exempt
     public bool IsExempt { get; set; }
     public bool IsImported { get; set; }
 

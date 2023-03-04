@@ -2,7 +2,7 @@ using SalesTax.Models;
 
 namespace SalesTax;
 
-public class InputParser
+public static class InputParser
 {
     public static StoreItem GetInput(string input)
     {
@@ -26,7 +26,8 @@ public class InputParser
             var priceString = input.Substring(input.LastIndexOf(" ", StringComparison.CurrentCultureIgnoreCase), input.Length - input.LastIndexOf(" ", StringComparison.CurrentCultureIgnoreCase)).Trim();
             itemPrice = Convert.ToDecimal(priceString);
 
-            if (itemDescription.Contains("Book", StringComparison.OrdinalIgnoreCase))
+            var exemptItems = new List<string>() {"book", "food", "chocolate", "chocolates", "pills", "medicine"};
+            if (exemptItems.Any(s => itemDescription.Contains(s, StringComparison.OrdinalIgnoreCase)))
             {
                 isExempt = true;
             }
