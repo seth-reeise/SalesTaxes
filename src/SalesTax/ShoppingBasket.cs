@@ -1,9 +1,8 @@
-using System.Collections;
 using SalesTax.Models;
 
 namespace SalesTax;
 
-public class ShoppingBasket : IEnumerable
+public class ShoppingBasket
 {
     private readonly List<StoreItem> Basket;
 
@@ -15,7 +14,7 @@ public class ShoppingBasket : IEnumerable
     public void AddItemToBasket(StoreItem newItem)
     {
         // If same item exists, update quantity instead
-        if (Basket.Any(item => item.ItemDescription.Equals(newItem.ItemDescription, StringComparison.OrdinalIgnoreCase)))
+        if (Basket.Any(item => item.ItemDescription.Equals(newItem.ItemDescription, StringComparison.OrdinalIgnoreCase) && item.Price.Equals(newItem.Price)))
         {
             foreach (var item in Basket.Where(item => item.ItemDescription.Equals(newItem.ItemDescription, StringComparison.OrdinalIgnoreCase)))
             {
@@ -29,64 +28,30 @@ public class ShoppingBasket : IEnumerable
     }
 
     /// <summary>
-    /// Calculates taxes for each item, total sales tax, and total amount
+    /// Uses TaxProcessor Builder to calculate taxes for each item
+    /// Updates total sales tax, total amount, and item price with tax added
     /// </summary>
     /// <returns>Receipt</returns>
-    public Receipt CalculateTotal()
+    public Receipt Checkout()
     {
         var salesTax = 0m;
         var total = 0m;
-        var importedTaxRate = .05m;
-        var regularSalesTaxRate = .10m;
-        // Item is imported but not exempt
-        var importedAndRegularRate = .15m;
 
-        // item tax for each item is calculated by the tax rate and then rounded up to the nearest .05 with Math.Ceiling(rate*20) / 20
         foreach (var item in Basket)
         {
-            var itemTax = 0m;
+            var (itemTax, itemTotal) = TaxProcessor.Builder()
+                .Price(item.Price)
+                .Rate(item.IsImported, item.IsExempt)
+                .ComputeTax()
+                .Build();
 
-            // Imported and exempt item
-            if (item.IsImported && item.IsExempt)
-            {
-                itemTax = Math.Ceiling(item.Price * importedTaxRate * 20) / 20;
-                item.Price += itemTax;
-                salesTax += (itemTax * item.Quantity);
+            salesTax += itemTax * item.Quantity;
+            total += itemTotal * item.Quantity;
 
-                total += (item.Price * item.Quantity);
-
-            }
-            // Imported but not exempt item
-            else if (item.IsImported && !item.IsExempt)
-            {
-                itemTax = Math.Ceiling(item.Price * importedAndRegularRate * 20) / 20;
-                item.Price += itemTax;
-                salesTax += (itemTax * item.Quantity);
-
-                total += (item.Price * item.Quantity);
-            }
-            // Not exempt and not imported item
-            else if (!item.IsExempt && !item.IsImported)
-            {
-                itemTax = Math.Ceiling(item.Price * regularSalesTaxRate * 20) / 20;
-                item.Price += itemTax;
-                salesTax += (itemTax * item.Quantity);
-
-                total += (item.Price * item.Quantity);
-            }
-            // No sales tax (exempt and not imported)
-            else
-            {
-                total += item.Price * item.Quantity;
-            }
-
+            // Update individual item price with tax added
+            item.Price = itemTotal;
         }
+
         return new Receipt(Basket, salesTax, total);
-
-    }
-
-    public IEnumerator GetEnumerator()
-    {
-        return Basket.GetEnumerator();
     }
 }

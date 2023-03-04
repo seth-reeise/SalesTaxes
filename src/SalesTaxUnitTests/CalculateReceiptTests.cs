@@ -20,7 +20,7 @@ public class CalculateReceiptTests
         StoreItem item1 = new(1, "Imported bottle of perfume", (decimal)47.50, true, false);
         basket.AddItemToBasket(item1);
 
-        var receipt = basket.CalculateTotal();
+        var receipt = basket.Checkout();
         Assert.NotNull(receipt);
         Assert.Equal(7.65m, receipt.SalesTax);
         Assert.Equal(65.15m, receipt.Total);

@@ -25,8 +25,8 @@ do
     }
 } while (true);
 
-// Calculate total and print receipt
-var receipt = basket.CalculateTotal();
+// Checkout
+var receipt = basket.Checkout();
 Console.Clear();
 Console.WriteLine("****** RECEIPT ******");
 Console.WriteLine(receipt.ToString());
